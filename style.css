@@ -1,0 +1,173 @@
+/* --- 灰黑白 & 置中風格 CSS --- */
+
+/* 1. 全局樣式：字體、背景、文字顏色 */
+body {
+    /* 字體設定保留 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1d1d1f; 
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* --- 新增：背景漸層 --- */
+    /* 使用 135 度 (斜向) 的線性漸層，從黑到白再到黑 */
+    background: linear-gradient(135deg, #000000 0%, #ffffff 50%, #000000 100%);
+    /* 固定背景，這樣捲動時漸層不會跟著動 */
+    background-attachment: fixed; 
+
+    /* --- 新增：Flexbox 置中 --- */
+    /* (1) 讓 body 至少跟視窗一樣高 */
+    min-height: 100vh;
+    /* (2) 使用 Flexbox */
+    display: flex;
+    /* (3) 垂直置中 */
+    justify-content: center;
+    /* (4) 水平置中 */
+    align-items: center; 
+    
+    /* 增加一點 padding，讓卡片在小螢幕上不會貼邊 */
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* 2. 主要內容容器 (卡片) */
+main {
+    /* 讓它佔據畫面的 80%，但最大不超過 900px */
+    width: 80%;     
+    max-width: 1000px; 
+    /* 移除 'margin: 30px auto'，因為 body 已經在處理置中 */
+    margin: 0; 
+    
+    /* --- 新增：透明感 (Frosted Glass 效果) --- */
+    /* 為了響應你的「透明」要求，我們使用半透明背景
+      搭配 backdrop-filter 實現「毛玻璃」效果，這在漸層背景上會很好看
+    */
+    background-color: rgba(255, 255, 255, 0.85); /* 85% 不透明度的白色 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* 支援 Safari */
+    
+    border-radius: 18px; 
+    /* 邊框也改用半透明，看起來更融合 */
+    border: 1px solid rgba(209, 210, 215, 0.7); 
+    
+    padding: 40px; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* 加上一點點陰影 */
+}
+
+/* 3. 標題 (H2, H3) - 不需變動 */
+h2, h3 {
+    border-bottom: none; 
+    padding-bottom: 0;
+    font-weight: 600; 
+    font-size: 2.2rem;
+    color: #1d1d1f;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-top: 40px;
+}
+
+/* 4. 表單群組 (Label) - 不需變動 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* 5. 輸入框 (Input) 和文字區 (Textarea) - 不需變動 */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #d2d2d7;
+    border-radius: 12px; 
+    box-sizing: border-box; 
+    font-size: 1rem;
+    font-family: inherit; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- 修改：:focus 狀態 --- */
+/* 當使用者點擊輸入框時 (focus) */
+input[type="text"]:focus,
+textarea:focus {
+    /* 邊框變為黑色 */
+    border-color: #333; 
+    
+    /* 光暈改為灰階 */
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15); 
+}
+
+/* --- 修改：送出按鈕 (Button) --- */
+button[type="submit"] {
+    /* 背景改為黑色 */
+    background-color: #1d1d1f; 
+    color: white;
+    
+    padding: 12px 24px;
+    border: none;
+    border-radius: 999px; /* 保持藥丸形狀 */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    align-self: flex-start; 
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    /* Hover 時改為深灰色 */
+    background-color: #555; 
+}
+
+/* 7. 分隔線 (hr) - 不需變動 */
+hr {
+    margin: 40px 0;
+    border: 0;
+    border-top: 1px solid #d2d2d7; 
+}
+
+/* 8. 留言列表 - 不需變動 */
+#comment-list {
+    margin-top: 20px;
+}
+
+/* 9. 每一則留言 (comment-item) - 不需變動 */
+.comment-item {
+    background-color: transparent; 
+    border: none;
+    border-bottom: 1px solid #d2d2d7; 
+    padding: 20px 0; 
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.comment-item strong {
+    color: #1d1d1f; 
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.comment-item p {
+    margin: 8px 0; 
+    color: #333;
+}
+
+.comment-item small {
+    color: #888; 
+    font-style: normal;
+    font-size: 0.85rem;
+}
